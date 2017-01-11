@@ -1,3 +1,9 @@
+*.sdf
+*.suo
+Debug
+Release
+firstConsole/Debug
+firstConsole/Release
 # Compiled Object files
 *.slo
 *.lo
