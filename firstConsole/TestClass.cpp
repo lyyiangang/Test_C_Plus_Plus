@@ -104,7 +104,12 @@ namespace Test
         PrintAfterOrder(startNode->rNode);
         std::cout << startNode->value << " ";
     }
+    void Tree::PrintAfterOrderByStack(Node* startNode)const
+    {
+        if (startNode == nullptr)
+            return;
 
+    }
     void Tree::PrintLevelOrder(Node* startNode)const
     {
         if (startNode == nullptr)
