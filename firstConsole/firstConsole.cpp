@@ -13,10 +13,10 @@
 void TestBinaryTree()
 {
 
-    //                                    8
-    //                              5           15
-    //                           3     7    12       18
-    //                          1  4  6 _ 11   13  16   19 
+    //                                      8
+    //                              5                15
+    //                           3      7        12       18
+    //                          1  4  6   _    11   13  16   19 
     //                                  
     Test::Tree tree;
     tree.AddData(8);
@@ -36,11 +36,18 @@ void TestBinaryTree()
     
     std::cout << "\n------------pre order-----------" << std::endl;
     tree.PrintPreOrder(tree.GetRootNode());
+    std::cout << "\n--------------pre order by stack----\n" << std::endl;
+    tree.PrintPreOrderByStack(tree.GetRootNode());
+
     std::cout << "\n---------------mid order----------" << std::endl;
     tree.PrintMidOrder(tree.GetRootNode());
+    std::cout << "\n-------------- mid order by stack--\n" << std::endl;
+    tree.PrintMidOrderByStack(tree.GetRootNode());
+
     std::cout << "\n---------------after order----------" << std::endl;
     tree.PrintAfterOrder(tree.GetRootNode());
-
+    std::cout << "\n-----------------lever order----------" << std::endl;
+    tree.PrintLevelOrder(tree.GetRootNode());
     tree.FreeAllNodes();
 }
 

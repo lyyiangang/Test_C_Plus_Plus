@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "TestClass.h"
+#include <queue>
+#include <stack>
 
 namespace Test
 {
@@ -42,17 +44,57 @@ namespace Test
     {
         if (startNode == nullptr)
             return;
-        std::cout << startNode->value <<"  ";
+        std::cout << startNode->value <<" ";
         PrintPreOrder(startNode->lNode);
         PrintPreOrder(startNode->rNode);
+    }
+    void Tree::PrintPreOrderByStack(Node* startNode)const
+    {
+        if (startNode == nullptr)
+            return;
+        std::stack<Node*> allNodes;
+        while (startNode != nullptr || !allNodes.empty())
+        {
+            while (startNode!= nullptr)
+            {
+                std::cout << startNode->value << " ";
+                allNodes.push(startNode);
+                startNode = startNode->lNode;
+            }
+            if (!allNodes.empty())
+            {
+                startNode = allNodes.top()->rNode;
+                allNodes.pop();
+            }
+        }
     }
     void Tree::PrintMidOrder(Node* startNode)const
     {
         if (startNode == nullptr)
             return;
         PrintMidOrder(startNode->lNode);
-        std::cout << startNode->value << "   ";
+        std::cout << startNode->value << " ";
         PrintMidOrder(startNode->rNode);
+    }
+    void Tree::PrintMidOrderByStack(Node* startNode)const
+    {
+        if (startNode == nullptr)
+            return;
+        std::stack<Node*> allNodes;
+        while (startNode != nullptr || !allNodes.empty())
+        {
+            while (startNode != nullptr)
+            {
+                allNodes.push(startNode);
+                startNode = startNode->lNode;
+            }
+            if (!allNodes.empty())
+            {
+                std::cout << allNodes.top()->value << " ";
+                startNode = allNodes.top()->rNode;
+                allNodes.pop();
+            }
+        }
     }
     void Tree::PrintAfterOrder(Node* startNode)const
     {
@@ -60,11 +102,27 @@ namespace Test
             return;
         PrintAfterOrder(startNode->lNode);
         PrintAfterOrder(startNode->rNode);
-        std::cout << startNode->value << "   ";
+        std::cout << startNode->value << " ";
     }
-    void Tree::PrintLevelOrder()const
+
+    void Tree::PrintLevelOrder(Node* startNode)const
     {
+        if (startNode == nullptr)
+            return;
+        std::queue<Node*> allNodes;
+        allNodes.push(startNode);
+        while (!allNodes.empty())
+        {
+            Node* frontNode = allNodes.front();
+            std::cout << frontNode->value << " ";
+            if(frontNode->lNode!=nullptr)
+                allNodes.push(frontNode->lNode);
+            if(frontNode->rNode!=nullptr)
+                allNodes.push(frontNode->rNode);
+            allNodes.pop();
+        }
     }
+
     void Tree::PrintStackPreOrder()const
     {
     }

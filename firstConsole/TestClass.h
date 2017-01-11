@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 namespace Test
 {
@@ -16,9 +16,16 @@ namespace Test
         void AddData(int val);
         void FreeAllNodes();
         void PrintPreOrder(Node* startNode)const;
+        void PrintPreOrderByStack(Node* startNode)const;
+
         void PrintMidOrder(Node* startNode)const;
+        void PrintMidOrderByStack(Node* startNode)const;
+
         void PrintAfterOrder(Node* startNode)const;
-        void PrintLevelOrder()const;
+        void PrintAfterOrderByStack(Node* startNode)const;
+
+        void PrintLevelOrder(Node* startNode)const;//层序遍历
+
         void PrintStackPreOrder()const;
         void PrintStackAfterOrder()const;
         Node* GetRootNode()const;
