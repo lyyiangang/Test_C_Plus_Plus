@@ -1,6 +1,7 @@
 *.sdf
 *.suo
 *.opensdf
+ipch
 Debug
 Release
 firstConsole/Debug
