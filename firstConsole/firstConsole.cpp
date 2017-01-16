@@ -53,10 +53,13 @@ void TestBinaryTree()
     std::cout << tree.Height(tree.GetRootNode()) << std::endl;
     tree.FreeAllNodes();
 }
-
+void TestKDTree()
+{
+}
 
 int main()
 {
     TestBinaryTree();
+    TestKDTree();
     system("pause");
 }

@@ -147,17 +147,24 @@ namespace Test
         if (pts.empty())
             return;
         StlPoint2Vector copiedPts = pts;
-        float variance[2] = { 0 };
-        Variance(copiedPts, variance);
-        int split = variance[0] > variance[1] ? 0 : 1;
-        CreateNode(_root, split, &copiedPts);
+        Node* startNode = _root;
+        while (!pts.empty())
+        {
+            float variance[2] = { 0 };
+            Variance(copiedPts, variance);
+            int split = variance[0] > variance[1] ? 0 : 1;
+            CreateNode(startNode, split, &copiedPts);
+
+        }
+
     }
     void KDTree::CreateNode(KDNode* startNode, int split, StlPoint2Vector* pts)
     {
         assert(startNode == nullptr && (split == 1 || split == 0));
-        int tmpSplit = split;
+        if (pts->empty())
+            return;
         std::sort(pts->begin(),pts->end(), 
-                  [tmpSplit ](const Point2 & ptA, const Point2 & ptB){return ptA[tmpSplit] > ptB[tmpSplit]; });
+                  [split ](const Point2 & ptA, const Point2 & ptB){return ptA[split] > ptB[split]; });
         int mid = (int)(pts->size() / 2);
         startNode = new KDNode();
         startNode->data = pts->at(mid)[split];
@@ -166,9 +173,6 @@ namespace Test
         startNode->range[0] = pts->front()[split];
         startNode->range[1] = pts->back()[split];
         pts->erase(pts->begin() + mid);
-        
-        split = (split == 0) ? 1 : 0;
-
     }
 
     void Variance(const StlPoint2Vector& pts, float variance[2])
