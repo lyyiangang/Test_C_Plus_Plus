@@ -9,7 +9,7 @@
 #include <vector>
 #include <numeric>
 #include "TestClass.h"
-
+#include <functional>
 void TestBinaryTree()
 {
 
@@ -55,11 +55,22 @@ void TestBinaryTree()
 }
 void TestKDTree()
 {
+    Test::StlPoint2Vector pts;
+    pts.emplace_back(7, 2);
+    pts.emplace_back(5,4);
+    pts.emplace_back(9,6);
+    pts.emplace_back(2,3);
+    pts.emplace_back(4,7);
+    pts.emplace_back(8,1);
+
+    Test::KDTree kdtree;
+    kdtree.ConstructTree(pts);
+    
 }
 
 int main()
 {
-    TestBinaryTree();
+   // TestBinaryTree();
     TestKDTree();
     system("pause");
 }

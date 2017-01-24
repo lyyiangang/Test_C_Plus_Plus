@@ -42,6 +42,11 @@ namespace Test
     typedef struct Point2_t
     {
     public:
+        Point2_t(float xx, float yy)
+        {
+            pos[0] = xx;
+            pos[1] = yy;
+        }
         float& operator[](int index){
             return pos[index];
         }
@@ -57,8 +62,18 @@ namespace Test
 
     typedef struct KDNode_t
     {
-        float data;
+        KDNode_t() :pt(0,0),
+        level(0),
+        parent(nullptr),
+        left(nullptr),
+        right(nullptr)
+        {
+            range[0] = 0;
+            range[1] = 0;
+        }
+        Point2 pt;
         float range[2];
+        int level;
         KDNode_t* parent;
         KDNode_t* left;
         KDNode_t* right;
@@ -71,15 +86,18 @@ namespace Test
         KDTree() :_root(nullptr),
                   _dim(2){};
         void ConstructTree(const StlPoint2Vector& pts);
+        void AppendPoint(KDNode** parentNode,const Point2& pt,float range[2], int level);
 
+        KDNode* RootNode(){return _root;};
     private:
-        void CreateNode(KDNode* startNode, int split, StlPoint2Vector* pts);
+        KDNode* NewNode(const Point2& pt);
+        void ConstructTreePrivate(KDNode** parentNode,StlPoint2Vector::iterator startIt,StlPoint2Vector::iterator endIt,int level=1);
 
         KDNode* _root;
         int _dim;
     };
 
     //两个不同维度的方差
-    void Variance(const StlPoint2Vector& pts, float variance[2]);
+    void Variance(StlPoint2Vector::iterator startIt, StlPoint2Vector::iterator endIt, float variance[2]);
 
 }
